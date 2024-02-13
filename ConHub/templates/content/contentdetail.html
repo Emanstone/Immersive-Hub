@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+<li>{{ object.title}}</li>
+{% endblock post_detail_link %}
+
+<body>
+  {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Linked Video Detail Page</h2>
+                <h4> {{ object.title }}</h4>
+                <p>{{ object.description }}</p>
+                {% if request.user.is_superuser %}
+                <a href="{% url 'content:editembed' object.pk %}">Edit Details</a><br><br>
+                {% endif %}
+            <strong><a href="{% url 'content:linked' %}">Go To Linked Videos Page</a></strong>
+                <ol>
+                    {% for video in videos %}
+                      <li><a href="{{ video.get_absolute_url }}">{{ video }}</a></li>
+                    {% endfor %}
+                </ol>            
+            </div>
+        </div>
+   </div>
+   
+  {% endblock content %}
+</body>
+</html>

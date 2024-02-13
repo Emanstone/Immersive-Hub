@@ -1,0 +1,41 @@
+body {
+    background-image: url('../static/images/gaza16.jpg')!important;
+    background-size: cover;
+
+}
+
+.container {
+    text-align: center;
+    justify-content: center;
+    margin-top: 5px;
+    background-color: #d6d6d6;
+    /* background-color: #bababae9; */
+    padding: 10px 5px 30px 5px;
+    border: 10px, solid black;
+    border-radius: 10px;
+    
+}
+
+
+h2, h3 {
+    text-align: center;
+}
+
+
+.content {
+    text-align: center;
+}
+
+
+hr {
+    height: 3px; /* Adjust the value to make it thicker */
+    border: none;
+    background-color: #000;
+}
+
+
+.mail{
+    width: 50%;
+}
+
+

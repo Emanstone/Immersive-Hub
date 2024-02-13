@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+   <li>Uploaded videos</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+
+  <body>
+      <div class="containerz" style="color: dodgerblue;">
+          <h3 style="font-style: italic;">Play Video</h3>
+      </div>
+      <hr>
+    <div class="container">
+        {% comment %} <strong class="fst-italic"><a href="{% url 'content:list' %}">Back To Content List Page</a></strong> {% endcomment %}
+        <div class="row">
+          {% if request.user.is_authenticated %}
+            {% for vid in videos %}
+                <div class="col-sm-3 col-md-3">
+                    <h5 class="text-center mt-5 mb-2">{{ vid.title|slice:":12"  }}</h5>
+
+                    <video class="embed-responsive embed-responsive-16by9" 
+                        controls 
+                        controlsList="nodownload" 
+                        width="200" 
+                        height="150">
+                      <source src="{{vid.video_file.url}}" type="video/mp4">
+                    </video>
+
+                </div>
+            {% endfor %}
+
+          {% else %}
+
+            <h3>Login And Upgrade Your Membership Enjoy Immersive Content</h3>
+            <p>To view this video, you'll need to login</p>
+            <br>
+            <a href="{% url 'membership:mselect' %}"><button class="btn btn-primary">Check out memberships</button></a>
+            <br><br><br>
+            <hr>
+
+          {% endif %}
+
+        </div>     
+     </div>
+  </body>
+  {% endblock content %}
+</html>

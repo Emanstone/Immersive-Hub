@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  <li>Edit Video</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+
+    <style>
+        h2 {
+            color: dodgerblue;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+
+        input {
+            width: 30vw;
+        }
+
+
+        button {
+            font-weight: bold;
+            background-color: darkblue;
+            color: white;
+            border-radius: 5px;
+            margin-left: 65px;
+        }
+        
+        form {
+            color: white;
+            font-weight: bold;
+        }
+
+    </style>
+    
+    <body>
+        <h2>Edit Video Details</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+    </body>
+    
+
+{% endblock content %}

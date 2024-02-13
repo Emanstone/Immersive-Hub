@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  <li>Dashboard</li>
+{% endblock post_detail_link %}
+
+<body>
+    {% block content %}
+    {% include "messages.html" %}
+    <div class="containerz" style="color: dodgerblue; margin-bottom: 25px;">
+    <h3 style="font-style: italic;">Content List Page</h3>
+    </div>
+    
+  
+  <div class="container">
+    <h4>Linked Videos</h4>
+        <div class="row">
+            {% for item in object_list %}
+                <div class="col-sm-2 col-md-2">               
+                <strong><a href="{{ item.get_absolute_url }}">{{ item.title|slice:":12" }}</a></strong>    
+                </div>
+            {% endfor %}
+        </div>
+   </div><br>
+
+  <div class="container">
+        <h4>Uploaded Videos</h4>
+        <div class="row">
+            {% for video in videos %}
+                <div class="col-sm-2 col-md-2">    
+                <strong><a href="{{ video.get_absolute_url }}">{{ video.title|slice:":12" }}</a></strong>   
+                </div>
+            {% endfor %}
+        </div>
+   </div><br>
+  
+  <div class="container">
+       <h4>PDFs</h4>
+        <div class="row">
+            {% for pd in articles %}
+                <div class="col-sm-2 col-md-2">
+                <strong><a href="{{ pd.get_absolute_url }}">{{ pd.title|slice:":12" }}</a></strong>     
+                </div>
+            {% endfor %}
+        </div>
+   </div>
+  
+  
+  
+   {% comment %} <a href="{% url 'video:upload' %}">Upload New Video</a>  <hr> {% endcomment %}
+   {% endblock content %}
+</body>
+
+</html>

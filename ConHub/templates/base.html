@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    {% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Emmasive Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/custom.css' %}">
+  </head>
+  <body>
+    
+    {% include "messages.html" %}
+    <div class="container d-flex pl-5 fw-bold">
+
+      <nav aria-label="breadcrumb p-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item px-1"><a href="{% url 'content:list' %}">Dashboard</a></li>
+          <li class="breadcrumb-item px-1"><a href="{% url 'content:upload' %}">Upload Video</a></li>
+          <li class="breadcrumb-item px-1"><a href="{% url 'membership:mselect' %}">Subscribe</a></li>
+          {% if request.user.is_superuser %}
+          <li class="breadcrumb-item px-1"><a href="{% url 'content:embed' %}">Embed Video</a></li>
+          <li class="breadcrumb-item px-1"><a href="{% url 'content:pdfup' %}">Upload PDF</a></li>
+          {% endif %}
+        </ol>
+      </nav>
+      <span class="mx-1">/</span>
+
+        {% block post_detail_link %}
+        <span>{{ user_membership.membership.membership_type}} &nbsp;/</span>
+        {% endblock post_detail_link %}
+
+        {% comment %} <span class="mx-3">/</span> {% endcomment %}
+
+      {% if not request.user.is_authenticated %}
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item px-1"><a href="{% url 'userapp:signup' %}">Register</a></li>
+          <li class="breadcrumb-item px-1"><a href="{% url 'userapp:login' %}">Login</a></li>
+        </ol>
+      </nav>
+      <span class="mx-3">/</span>
+      {% else %}
+        <li class="breadcrumb-item px-1"><a href="{% url 'membership:profile' %}">{{ request.user }}</a></li>  
+      {% endif %}
+
+      {% if request.user.is_authenticated %}
+        <span class="mx-1">/</span>
+        <a href="{% url 'userapp:logout' %}">Logout</a>
+      {% endif %}
+
+      {% comment %} <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item px-3"><a href="#">Logout</a></li>
+        </ol>
+      </nav> {% endcomment %}
+      
+    </div> <hr>
+    <div class="content">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+{% comment %} <div class="container">
+        
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+
+        {% block post_detail_link %}
+        {% endblock post_detail_link %}
+
+        {% if not request.user.is_authenticated %}
+        <li class="pull-right"><a href="#">Register</a></li>
+        <li class="pull-right"><a href="#">Login</a></li>
+        {% else %}
+        <li class="pull-right active" aria-current="page">Memberships</li>
+        {% endif %}
+    </ol>
+  
+</div> {% endcomment %}

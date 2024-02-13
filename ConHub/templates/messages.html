@@ -1,0 +1,41 @@
+{% if messages %}
+
+    <style type="text/css">
+
+        div.messges {
+            background-color: #ff6b6b;
+            color: #f7fff7;
+        }
+        
+        ul.messages {
+            text-align: center;
+            list-style-type: none;
+        }
+
+    </style>
+   
+    <div class="messages">
+
+        <ul class="messges">
+            {% for message in messages %}
+            <li {% if meessage.tags %} class="{{ message.tags }}"{% endif %}>
+                {% if "html_safe" in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+
+
+
+    {% comment %} {% if messages %}
+        <div class="messages" style="width: 25vw; margin: auto; font-style: italic;">
+            {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-xs alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %} {% endcomment %}
+
+
+
+{% endif %}

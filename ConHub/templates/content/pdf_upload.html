@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  <li>Upload Pdf</li>
+{% endblock post_detail_link %}
+
+
+{% block content %}
+
+    <style>
+
+        form {
+            text-align: center;
+            font-size: 15px;
+            color: white;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 3px;
+            width: 50vw;
+        }
+
+        textarea {
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 50vw;
+        }
+
+        .mem {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 5px;
+            width: 20vw;
+        }
+    </style>
+
+    <h2 style="color: aliceblue;">Upload Pdf</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="slug" id="slug" placeholder="Slug" required>
+        <br>
+
+        <input type="text" name="title" id="title" placeholder="Title" required>
+        <br>
+
+        <textarea name="description" id="description" placeholder="Description" required></textarea>
+        <br>
+
+        <select class="mem" name="allowed_memberships" id="allowed_memberships" required>
+            {% for subs in sub %}
+                <option value="{{ subs.id }}">{{ subs.membership_type }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <input type="number" name="position" id="position" placeholder="Position" required>
+        <br>
+
+        <input type="file" name="pdf_file" id="pdf_file" placeholder="pdf_File" accept=".pdf" required>
+        <br><br>
+
+        <button class="btn btn-primary" type="submit">Upload Pdf</button>
+    </form>
+{% endblock content %}

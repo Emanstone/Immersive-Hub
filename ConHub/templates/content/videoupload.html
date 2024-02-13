@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  <li>Upload Video</li>
+{% endblock post_detail_link %}
+
+
+{% block content %}
+
+    <style>
+
+        form {
+            text-align: center;
+            font-size: 15px;
+            color: white;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 3px;
+            width: 50vw;
+        }
+
+        textarea {
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 50vw;
+        }
+
+        button {
+            padding: 5px;
+            width: 20vw;
+        }
+
+    </style>
+
+    <h2 style="color: aliceblue;">Upload Video</h2><br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <input type="file" name="video_file" id="video_file" placeholder="Video File" required>
+        <br>
+        
+        <input type="text" name="title" id="title" placeholder="Title" required>
+        <br>
+        
+        <textarea name="description" id="description" placeholder="Description (Optional)"></textarea>
+        <br>
+        <button class="btn btn-primary" type="submit">Upload Video</button>
+    </form>
+{% endblock content %}
+
+
+

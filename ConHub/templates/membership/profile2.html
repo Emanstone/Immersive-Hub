@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  {% comment %} <li>Profile page</li> &nbsp; {% endcomment %}
+  <li>{{ user_membership.membership.membership_type}}</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+<div class="container"><br><br>
+    {% comment %} <div class="row"> {% endcomment %}
+        <h2>Profile</h2><br><br><br>
+
+        {% comment %} <div class="col-sm-4 col-md-12"> {% endcomment %}
+            {% if user_subscription != None %}
+                <a href="#">Cancel Subscription</a>
+            <h4>Current Membership : {{ user_membership.membership.membership_type}}</h4>
+                {% comment %} <small>since : {{ user_subscription.get_created_date }}</small></h4> {% endcomment %}
+                {% if user_subscription.active != false %}
+                <h4>Next payment Due: {{ user_plan.get_next_billing_date}}</h4>
+                {% comment %} <a href="#">Cancel Subscription</a> {% endcomment %}
+                {% else %}
+                <p>You don't have an active subscription, check them out here</p>
+                <a href="{% url 'mselect' %}"></a>
+                {% endif %}
+            {% endif %}
+        {% comment %} </div> {% endcomment %}
+
+
+        {% comment %} <div class="container"> {% endcomment %}
+            <div class="conhead">
+                <div class="pimg">
+                    <img src="{% if profile_image_url %}{{ profile_info.profile_image_url }}{% else %}{{profile_info.profile_image_url}}{% endif %}" width="100px" height="100px" alt="">
+                    {% comment %} <img src="{{ profile_info.profile_image_url }}" width="100px" height="100px" alt=""> {% endcomment %}
+                </div>
+            </div>
+        
+            <div class="name">
+                <span class="nam">{{profile_info.full_name}}</span> <br>
+                <span class="nam">{{user.username}}</span>
+                
+                <p>{{user.email}}</p>
+                <p>{{profile_info.country}}</p>
+                <p>{{profile_info.dob}}</p>
+            </div>
+            
+            
+            <div class="boton">
+                <a href="#"><input type="button" class="btn btn-primary btn-sm" value="Update Profile">
+                <a href="#"> <input type="button" class="btn btn-primary btn-sm" value="Dashboard">
+            </div>
+
+            
+        {% comment %} </div> {% endcomment %}
+
+    {% comment %} </div> {% endcomment %}
+</div>
+{% endblock content %}
+
+{% comment %} {% url 'cancel' %} {% endcomment %}

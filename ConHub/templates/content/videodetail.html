@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+<li>{{ object.title}}</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Uploaded video Detail Page</h2>
+                <h4> {{ video.title }}</h4>
+                <p>{{ video.description }}</p>
+                {% if request.user.is_superuser %}
+                <a href="{% url 'content:editvideo' video.pk %}">Edit Details</a><br><br>
+                {% endif %}
+            <strong><a href="{% url 'content:play' %}">Go To Uploaded videos Page</a></strong>
+                <ol>
+                    {% for video in videos %}
+                      <li><a href="{{ video.get_absolute_url }}">{{ video }}</a></li>
+                    {% endfor %}
+                </ol>            
+            </div>
+        </div>
+   </div><br><br>
+   {% endblock content %}
+</body>
+</html>

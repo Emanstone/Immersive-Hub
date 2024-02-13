@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load embed_video_tags %}
+
+{% block post_detail_link %}
+  <li>Embeded Videos</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+
+  <body>
+    <div class="containerz" style="color: dodgerblue;">
+        <h3 style="font-style: italic;">Play Video</h3>
+        <span style="font-weight: bold;">{{user_membership.membership.membership_type}}</span>
+    </div>
+    <hr>
+    <div class="container">
+        
+      <div class="row">
+
+        {% if user_membership.membership.membership_type != 'free' and subscription.active == true %}
+        
+          {% for embed in links %}
+            <div class="col-sm-6 col-md-6">
+              <h5 class="text-center mt-5 mb-2">{{ embed.title|slice:":25"  }}</h5>
+
+              {% video embed.video_url 'small' %}
+
+            </div>
+          {% endfor %}
+
+        {% else %}
+
+          <br>
+          <hr>
+          <h3>Upgrade Membership</h3>
+          <p>To view this video, you'll need to upgrade your membership</p>
+          <br>
+          <a href="{% url 'membership:mselect' %}"><button class="btn btn-primary">Check out memberships</button></a>
+          <br><br><br>
+          <hr>
+
+        {% endif %}  
+      </div>
+    </div>
+    
+  </body>
+  {% endblock content %}
+</html>

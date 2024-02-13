@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  {% comment %} <li>Profile page</li> &nbsp; {% endcomment %}
+  <li>{{ user_membership.membership.membership_type}}</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+<div class="container"><br>
+    <div class="row">
+        <h2>Profile</h2><br><br><br>
+        <div class="col-sm-4 col-md-12">
+            {% if user_subscription != None and user_subscription != 'free' %}
+                <a href="{% url 'membership:confirm' %}">Cancel Subscription</a><br><br>
+                <h4>Current Membership : &nbsp; <span style="font-style: italic;">{{ user_membership.membership.membership_type}}</span></h4>
+                {% comment %} <small>since : {{ user_subscription.date_created }}</small></h4> {% endcomment %}
+                {% if user_membership.membership.membership_type != 'free' and subscription.active == true %}<br>
+                  <h4>Next payment Due on : &nbsp; <span style="font-style: italic;">{{ next_pay_date }}</span></h4>
+                {% else %}
+                   <br>
+                   <a href="{% url 'membership:mselect' %}">You don't have an active subscription, check them out here</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

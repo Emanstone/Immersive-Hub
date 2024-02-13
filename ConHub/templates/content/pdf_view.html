@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+
+    <h1>PDF Viewer</h1>
+    
+    <div class="row">
+        {% for p in object %}
+            {% if pdf_url %}
+                <div class="col-sm-6 col-md-6">
+                    <embed src="{{ p.pdf_url }}" type="application/pdf" width="100%" height="600px" />
+                </div>
+            {% else %}
+                <p>No PDF file selected.</p>
+            {% endif %}
+        {% endfor %}
+                
+    </div>
+
+
+    {% comment %} {% if object.pdf_allowed_mtypes == 'free' %}
+        {% if pdf_url %}
+            <embed src="{{ pdf_url }}" type="application/pdf" width="100%" height="600px" />
+        {% else %}
+            <p>No PDF file selected.</p>
+        {% endif %}
+    {% else %}
+        <h3>Upgrade Membership</h3>
+        <p>To view this pdf, you'll need to upgrade your membership</p>
+        <br>
+        <a href="{% url 'membership:mselect' %}"><button class="btn btn-primary">Check out memberships</button></a>
+        <hr>
+  {% endif %} {% endcomment %}
+
+</body>
+{% endblock content %}
+</html>

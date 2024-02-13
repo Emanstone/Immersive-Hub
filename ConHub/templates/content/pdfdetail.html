@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+<li>{{ object.title}}</li>
+{% endblock post_detail_link %}
+
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2>PDF Detail</h2>
+                {{user_membership.membership.membership_type}}
+                <h4> {{ object.title }}</h4>
+                <p>{{ object.description }}</p>
+                {% if request.user.is_superuser %}
+                <a href="{% url 'content:editpdf' object.pk %}">Edit Details</a><br><br>
+                {% endif %}
+                
+                {% if user_membership.membership.membership_type == 'Premium' and subscription.active == true %}
+                    <strong><a href="{% url 'content:viewpdf' object.id %}">View PDF</a></strong>
+                    <hr>
+                {% else %}
+                    <hr>
+                    <h3>Upgrade Membership</h3>
+                    <p>To view this pdf, you'll need to upgrade your membership</p>
+                    <br>
+                    <a href="{% url 'membership:mselect' %}"><button class="btn btn-primary">Check out memberships</button></a>
+                    <hr>
+    
+              {% endif %}
+
+            </div>
+        </div>
+   </div>
+    {% endblock content %}
+</body>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% block content %}
+<body>
+    <style>
+        body {
+            background-color: #d6d6d6;
+        }
+    
+        form {
+            /* margin-top: 20%; */
+            text-align: center;
+            font-size: 15px;
+            background-color: #333;
+            width: 60vw;
+            padding: 50px 0px;
+            margin: auto;
+            border-radius: 5px;
+        }
+    
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 50vw;
+            border-radius: 5px;
+        }
+    
+        
+        h1 {
+            text-align: center;
+            margin-top: 7%;
+        }
+    
+    
+        .btn {
+            padding: 10px;
+            width: 20vw;
+            font-weight: bold;
+            background-color: blue;
+            color: white;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .text-center{
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+    </style>
+
+    <h1>Login Here</h1><br>
+    <br>
+    <form class="user" method="post" action="{% url 'userapp:login' %}">
+     {% csrf_token %}
+    
+        <input type="text" name="username" id="username" placeholder="Username"><br>
+        <input type="password" name="password" id="password" placeholder="Password"><br>
+        <input class="btn" type="submit" value="Login">
+
+    </form>
+    <div class="text-center">
+        <span>No Account? : </span><a class="lg fw-bold" href="{% url 'userapp:signup' %}">Create an Account!</a>
+    </div>
+    {% endblock content %}

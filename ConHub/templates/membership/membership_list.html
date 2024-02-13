@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load myfilters %}
+
+{% block post_detail_link %}
+  <li>Subscription page</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+<div class="container">
+    <h2>Select Membership</h2><br>
+    {% comment %} <p>Current Membership : {{ current_membership }}</p> {% endcomment %}
+    <div class="row" style="justify-content: center;">
+        {% for object in object_list %}
+        <div class="col-sm-4 col-md-4">
+            {{ object.membership_type }}
+            <p style="font-weight: bold;">Price : ₦ {{ object.price | format_hundreds }} <small>/ month</small></p>
+
+            {% comment %} <h5>Included Contents</h5>
+            <ul>
+                {% for content in object.content_set.all %}
+                <li>{{ content.title }}</li>
+                {% endfor %}
+                {% for pdf in object.contentpd_set.all %}
+                <li>{{ pdf.title }}</li>
+                {% endfor %}
+            </ul>&nbsp; {% endcomment %}
+
+            {% if object.membership_type != 'free' and subscription.active == false %}
+            <form action="{% url 'membership:mselect' %}" method="POST">
+                {% csrf_token %}
+                {% if object.membership_type != current_membership or subscription.active == false %}
+                <button class="btn btn-primary btn-sm">Select</button><br><br><br>
+                {% else %}
+                <small>This is your current membership</small><br><br><br>                
+                {% endif %}
+                <input type="hidden" name="membership_type" value="{{ object.membership_type }}">
+               
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+
+
+
+

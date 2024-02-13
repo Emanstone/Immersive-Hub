@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  <li>Cancel Subscription</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+<style>
+    h2 {
+        margin-top: 4%;
+        color: dodgerblue;
+        font-weight: bold;
+        font-style: italic;
+        margin-bottom: 30px;
+    }
+
+    p {
+        font-weight: bold;
+        margin-bottom: 50px;
+        background-color: #d6d6d6;
+        padding: 10px;
+        border-radius: 5px;
+        display: inline;
+    }
+
+    a {
+        font-weight: bold;
+    }
+
+    button {
+        font-weight: bold;
+        background-color: darkblue;
+        color: white;
+        border-radius: 5px;
+    }
+
+</style>
+<body>
+    <h2>Confirm Subscription Cancellation</h2>
+    <p>Are you sure you want to cancel your subscription?</p> <br><br><br>
+    <form action="{% url 'membership:cancel' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Cancel My Subscription</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'membership:profile' %}" style="color: darkblue; padding: 5px; border-radius: 5px;">No, Go Back</a>
+    </form>
+</body>
+{% endblock content %}

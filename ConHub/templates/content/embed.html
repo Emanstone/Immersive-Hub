@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  <li>Embed Video</li>
+{% endblock post_detail_link %}
+
+
+{% block content %}
+
+    <style>
+
+        form {
+            text-align: center;
+            font-size: 15px;
+            color: white;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 3px;
+            width: 50vw;
+        }
+
+        textarea {
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 50vw;
+        }
+
+        .rel {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pd {
+            margin: 5px 10px 5px 10px;
+        }
+
+        .mem {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 5px;
+            width: 20vw;
+        }
+    </style>
+
+    <h2 style="color: aliceblue;">Embed Video</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="slug" id="slug" placeholder="Slug" required>
+        <br>
+
+        <input type="text" name="title" id="title" placeholder="Title" required>
+        <br>
+
+        <textarea name="description" id="description" placeholder="Description" required></textarea>
+        <br>
+
+        <select class="mem" name="allowed_memberships" id="allowed_memberships" required>
+            {% for sub in subs %}
+                <option value="{{ sub.id }}">{{ sub.membership_type }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <input type="number" name="position" id="position" placeholder="Position" required>
+        <br>
+
+        <input type="text" name="video_url" id="video_url" placeholder="Video URL" required>
+        <br>
+
+        <div class="rel">
+            <label for="video">Optional:</label>
+            <select class="pd" name="video" id="video">
+                <option value="" selected disabled>Select an existing video</option>
+                {% for vid in videos %}
+                    <option value="{{ vid.id }}">{{ vid.title }}</option>
+                {% endfor %}
+            </select>
+            
+
+            <label for="pdf">Optional:</label><br>
+            <select class="pd" name="pdf" id="pdf">
+                <option value="" selected disabled>Select an existing pdf</option>
+                {% for p in pdfs %}
+                    <option value="{{ p.id }}">{{ p.title }}</option>
+                {% endfor %}
+            </select>
+            
+        </div><br>
+
+        <button class="btn btn-primary" type="submit">Embed Video</button>
+    </form>
+{% endblock content %}

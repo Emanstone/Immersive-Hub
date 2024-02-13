@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block post_detail_link %}
+  <li>Edit Embeded</li>
+{% endblock post_detail_link %}
+
+{% block content %}
+
+    <style>
+        h2 {
+            margin-top: 4%;
+            color: dodgerblue;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+
+        input {
+            width: 40vw;
+        }
+
+
+        button {
+            font-weight: bold;
+            background-color: darkblue;
+            color: white;
+            border-radius: 5px;
+        }
+
+
+        textarea {
+            width: 40vw;
+        }
+
+
+        form {
+            width: 60vw;
+            margin: auto;
+        }
+
+    </style>
+
+    <h2>Edit Linked Video Details</h2>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="slug" id="slug" value="{{ embeded.slug }}" placeholder="Slug" required>
+        <br><br>
+        <input type="text" name="title" id="title" value="{{ embeded.title }}" placeholder="Title" required>
+        <br><br>
+        <textarea name="description" id="description" placeholder="Description" required>{{ embeded.description }}</textarea>
+        <br><br>
+        <button type="submit">Save Changes</button>
+    </form>
+    
+
+{% endblock content %}
