@@ -29,7 +29,8 @@
             {% if object.membership_type != 'free' and subscription.active == false %}
             <form action="{% url 'membership:mselect' %}" method="POST">
                 {% csrf_token %}
-                {% if object.membership_type != current_membership or subscription.active == false %}
+                {% if object.membership_type != current_membership and subscription.active == true %}
+                <!--{% if object.membership_type != current_membership or subscription.active == false %} -->
                 <button class="btn btn-primary btn-sm">Select</button><br><br><br>
                 {% else %}
                 <small>This is your current membership</small><br><br><br>                
